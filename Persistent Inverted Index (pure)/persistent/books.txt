@@ -1,0 +1,1 @@
+{'Frankenstein.txt', 'Beowulf.txt', 'The Souls of Black Folk.txt', 'The Yellow Wallpaper.txt', 'Pride and Prejudice.txt', 'Grimms’ Fairy Tales.txt', 'Jane Eyre.txt', 'The Adventures of Sherlock Holmes.txt', 'The Iliad.txt', 'The Scarlet Letter.txt', 'The Odyssey.txt', 'A Christmas Carol.txt', 'A Tale of Two Cities.txt', 'Walden.txt', 'Alice’s Adventures in Wonderland.txt'}
