@@ -59,11 +59,15 @@ def read_index():
 
 def get_posting_list(term):
     index = terms.get(term)
+    if index is None:
+        print("Sorry! No result was found for this query.")
+        exit(0)
     with open("./persistent/postingList.txt") as fp:
         for z, line in enumerate(fp):
             if z == index:
                 return eval(line)
     fp.close()
+    return dict()
 
 
 def search(term):
@@ -97,12 +101,62 @@ if not os.path.isdir("./persistent") or not os.path.isfile("./persistent/posting
 terms, books = read_index()
 
 
-print(search("kill"))
-print(search("boys"))
-print(NOT("boys"))
-print(search("horse"))
-print(NOT("kill"))
-print(NOT("horse"))
+def inp():
+    special_words = ["AND", "OR", "NOT"]
 
-print(AND("kill", "horse"))
-print(OR("kill", "horse"))
+    while True:
+        result = set()
+        query_set = input("Search: ").split(" ")
+        if query_set[0] == "QUIT":
+            exit(0)
+        length = len(query_set)
+        q = 0
+        while q < length:
+
+            que = query_set[q]
+            if que == "NOT":
+                query_set[q] = NOT(query_set[q + 1])
+                del query_set[q + 1]
+                length -= 1
+            q += 1
+
+        length = len(query_set)
+        q = 0
+        while q < length:
+            que = query_set[q]
+            if que not in special_words and type(que) != set:
+                query_set[q] = search(que)
+            q += 1
+
+        # if len([i for i in query_set if type(i) == dict]) > 0:
+        #     print("Sorry! No result was found for this query.")
+        #     return
+
+        length = len(query_set)
+        q = 0
+        while q < length:
+            que = query_set[q]
+            if que == "AND":
+                query_set[q + 1] = query_set[q - 1] & query_set[q + 1]
+                del query_set[q]
+                del query_set[q - 1]
+                length -= 2
+            if que == "OR":
+                query_set[q + 1] = query_set[q - 1] | query_set[q + 1]
+                del query_set[q]
+                del query_set[q - 1]
+                length -= 2
+            q += 1
+
+        result = query_set[0]
+
+        if result.__len__() == 0:
+            print("Sorry! No result was found for this query.")
+        else:
+            print(result)
+
+
+# 
+
+
+inp()
