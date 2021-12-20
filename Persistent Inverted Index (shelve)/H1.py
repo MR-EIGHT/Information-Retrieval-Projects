@@ -7,26 +7,26 @@ special_characters = ['!','"','#','$','%','&','(',')','*','+','/',':',';','<','=
 folder_path = './txt'
 dic = defaultdict(set)
 
-# for filename in glob.glob(os.path.join(folder_path, '*.txt')):
-#     with open(filename, 'r', encoding="utf8") as f:
-#         text = f.read()
-#         for i in special_characters: 
-#             text = text.replace(i, '')
-#         text = text.lower()
+for filename in glob.glob(os.path.join(folder_path, '*.txt')):
+    with open(filename, 'r', encoding="utf8") as f:
+        text = f.read()
+        for i in special_characters: 
+            text = text.replace(i, '')
+        text = text.lower()
 
-#         for x in text.split(" "):
-#             dic[x].add(str(filename).replace("./txt\\",""))
-
-
+        for x in text.split(" "):
+            dic[x].add(str(filename).replace("./txt\\",""))
 
 
 
 
-# s = shelve.open('persistency/dict')
-# try:
-#     s.update(dic)
-# finally:
-#     s.close()
+
+
+s = shelve.open('persistency/dict')
+try:
+    s.update(dic)
+finally:
+    s.close()
 
 
 s = shelve.open('./persistency/dict')
