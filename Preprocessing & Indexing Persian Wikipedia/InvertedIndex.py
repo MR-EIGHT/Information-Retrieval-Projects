@@ -18,7 +18,7 @@ class InvertedIndex:
 
         # reading files and tokenizing them.
         for doc in doc_store:
-            for term in tokenizer.tokenize(doc.body):
+            for term in tokenizer.tokenize(doc.body, True):
                 dic[term].add(doc.title)
             docs.add(str(doc.title))
 

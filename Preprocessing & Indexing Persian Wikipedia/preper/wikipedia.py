@@ -12,7 +12,10 @@ class Wikipedia:
         root = et.fromstring(file_string)
         counter = 0
         for doc in root.findall(r'doc'):
-            self.doc_store.append(preper.Document(doc.find('title').text, doc.find('abstract').text, counter))
+            if doc.find('title') is None or doc.find('abstract') is None:
+                continue
+            else:
+                self.doc_store.append(preper.Document(doc.find('title').text, doc.find('abstract').text, counter))
             counter += 1
 
         for doc in self.doc_store:
