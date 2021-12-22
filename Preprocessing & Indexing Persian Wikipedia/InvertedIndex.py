@@ -13,14 +13,14 @@ class InvertedIndex:
     # making the index first time the user runs the script.
     def make_index(self, doc_store):
         dic = defaultdict(set)
-        docs = set()
+        docs = dict()
         tokenizer = Tokenizer()
 
         # reading files and tokenizing them.
         for doc in doc_store:
             for term in tokenizer.tokenize(doc.body, True):
-                dic[term].add(doc.title)
-            docs.add(str(doc.title))
+                dic[term].add(doc.docId)
+            docs[doc.docId] = doc.title
 
         # storing the built indexes.
 
@@ -89,7 +89,7 @@ class InvertedIndex:
     # NOT-ing a term function -> returns list of books that the provided term is not in them.
     def NOT(self, term):
         pos = self.get_posting_list(term)
-        return set(self.docs) - set(pos)
+        return set(self.docs.keys()) - set(pos)
 
     # checks if the program is ready to read its sources or has to build them before
     def check_persistency(self, doc_store):
@@ -152,4 +152,6 @@ class InvertedIndex:
             if result.__len__() == 0:
                 print("Sorry! No result was found for this query.")
             else:
-                print(result)
+                for res in result:
+                    print("{} -".format(self.docs.get(res)), end="  ")
+                print()
