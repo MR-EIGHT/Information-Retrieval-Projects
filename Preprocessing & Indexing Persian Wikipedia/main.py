@@ -1,3 +1,5 @@
+import os
+
 from preper import Stemmer
 from preper import Normalizer
 from preper import Tokenizer
@@ -20,9 +22,12 @@ print(tokenizer.tokenize(
     "علی و حسن، به مدرسه رفتند. و در راه بازگشت به خانه دوستانِ قدیمی شان را دیدند. آیا آنها خوشحال شدند؟ یا خیر؟! "
     "می‌خواهم بدانم."))
 
-wiki = Wikipedia("./data/simple.xml")
-print(len(wiki.doc_store))
 
-inv = InvertedIndex.InvertedIndex(wiki.doc_store)
+if not os.path.isdir("persistent") or not os.path.isfile("persistent/postingList.txt"):
+    wiki = Wikipedia("./data/simple.xml")
+    print(len(wiki.doc_store))
+    inv = InvertedIndex.InvertedIndex(wiki.doc_store)
+else:
+    inv = InvertedIndex.InvertedIndex([])
 inv.inp()
 print()
