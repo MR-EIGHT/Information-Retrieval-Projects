@@ -22,7 +22,6 @@ print(tokenizer.tokenize(
     "علی و حسن، به مدرسه رفتند. و در راه بازگشت به خانه دوستانِ قدیمی شان را دیدند. آیا آنها خوشحال شدند؟ یا خیر؟! "
     "می‌خواهم بدانم."))
 
-
 if not os.path.isdir("persistent") or not os.path.isfile("persistent/postingList.txt"):
     wiki = Wikipedia("./data/simple.xml")
     print(len(wiki.doc_store))
