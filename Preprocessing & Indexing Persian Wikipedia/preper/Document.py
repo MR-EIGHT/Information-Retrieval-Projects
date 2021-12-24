@@ -12,4 +12,4 @@ class Document:
         return self.docId
 
     def __repr__(self) -> str:
-        return "Document( DocId = " + str(self.docId) + ", title = " + str(self.title) + ", )"
+        return "Document( DocId = " + str(self.docId) + ", Title = " + str(self.title) + ", )"

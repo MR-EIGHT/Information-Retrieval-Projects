@@ -6,6 +6,10 @@ from preper import Tokenizer
 from preper import Wikipedia
 import InvertedIndex
 
+"""
+preper is a persian text preprocessor package I've made.
+This section is the basic tests of this package:
+"""
 stemmer = Stemmer()
 print(stemmer.stem("گفتۀ"))
 print(stemmer.stem("نویسنده هایش"))
@@ -22,9 +26,11 @@ print(tokenizer.tokenize(
     "علی و حسن، به مدرسه رفتند. و در راه بازگشت به خانه دوستانِ قدیمی شان را دیدند. آیا آنها خوشحال شدند؟ یا خیر؟! "
     "می‌خواهم بدانم."))
 
+"""
+This is the second part of the project. In which we had to index documents in the 'simple.xml' file.
+"""
 if not os.path.isdir("persistent") or not os.path.isfile("persistent/postingList.txt"):
     wiki = Wikipedia("./data/simple.xml")
-    print(len(wiki.doc_store))
     inv = InvertedIndex.InvertedIndex(wiki.doc_store)
 else:
     inv = InvertedIndex.InvertedIndex([])
