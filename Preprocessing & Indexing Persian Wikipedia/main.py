@@ -16,6 +16,9 @@ print(stemmer.stem("نویسنده هایش"))
 print(stemmer.stem("نویسندگان"))
 print(stemmer.stem("ستودگان"))
 print(stemmer.stem("رفته ایم"))
+print(stemmer.stem("حیوانات"))
+print(stemmer.stem("جواهرات"))
+
 
 normalizer = Normalizer()
 print(normalizer.normalize("123 علیﻚ سلام"))
